@@ -1,5 +1,3 @@
-require('definitely'); // so it's not seen as extraneous
-module.exports = function(source) {
-    this.cacheable();
-    return `${source}; module.exports = require('definitely').default(module.exports, { whitelist: ["__esModule"] });`;
-}
+'use strict';require('definitely');// so it's not seen as extraneous
+module.exports=function(source){this.cacheable();return source+'; module.exports = require(\'definitely\').default(module.exports, { whitelist: ["__esModule"] });'};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImRlZmluaXRlbHktbG9hZGVyLmpzIl0sIm5hbWVzIjpbInJlcXVpcmUiLCJtb2R1bGUiLCJleHBvcnRzIiwic291cmNlIiwiY2FjaGVhYmxlIl0sIm1hcHBpbmdzIjoiYUFBQUEsUUFBUSxZQUFSLEVBQXVCO0FBQ3ZCQyxPQUFPQyxPQUFQLENBQWlCLFNBQVNDLE1BQVQsQ0FBaUIsQ0FDOUIsS0FBS0MsU0FBTCxHQUNBLE1BQVVELE9BQVYscUdBQ0gsQ0FIRCIsImZpbGUiOiJkZWZpbml0ZWx5LWxvYWRlci5qcyIsInNvdXJjZXNDb250ZW50IjpbInJlcXVpcmUoJ2RlZmluaXRlbHknKTsgLy8gc28gaXQncyBub3Qgc2VlbiBhcyBleHRyYW5lb3VzXG5tb2R1bGUuZXhwb3J0cyA9IGZ1bmN0aW9uKHNvdXJjZSkge1xuICAgIHRoaXMuY2FjaGVhYmxlKCk7XG4gICAgcmV0dXJuIGAke3NvdXJjZX07IG1vZHVsZS5leHBvcnRzID0gcmVxdWlyZSgnZGVmaW5pdGVseScpLmRlZmF1bHQobW9kdWxlLmV4cG9ydHMsIHsgd2hpdGVsaXN0OiBbXCJfX2VzTW9kdWxlXCJdIH0pO2A7XG59XG4iXX0=

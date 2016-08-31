@@ -4,6 +4,7 @@
   "description": "A webpack loader which disallows importing nonexistent members from a module",
   "main": "definitely-loader.js",
   "scripts": {
+    "build": "babel --minified -o definitely-loader.js src/definitely-loader.js",
     "release": "xyz",
     "release:patch": "xyz --increment patch",
     "release:minor": "xyz --increment minor",
@@ -32,6 +33,8 @@
     "definitely": "^1.0.0"
   },
   "devDependencies": {
+    "babel-cli": "6.14.0",
+    "babel-preset-es2015": "6.14.0",
     "xyz": "^1.0.0"
   }
 }
