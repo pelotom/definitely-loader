@@ -35,6 +35,7 @@
   "devDependencies": {
     "babel-cli": "6.14.0",
     "babel-preset-es2015": "6.14.0",
+    "loader-utils": "0.2.15",
     "xyz": "^1.0.0"
   }
 }
