@@ -28,7 +28,7 @@
     "url": "https://github.com/pelotom/definitely-loader/issues"
   },
   "homepage": "https://github.com/pelotom/definitely-loader#readme",
-  "peerDependencies": {
+  "dependencies": {
     "definitely": "^1.0.0"
   },
   "devDependencies": {
