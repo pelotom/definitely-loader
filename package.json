@@ -1,0 +1,37 @@
+{
+  "name": "definitely-loader",
+  "version": "1.0.0",
+  "description": "A webpack loader which disallows importing nonexistent members from a module",
+  "main": "definitely-loader.js",
+  "scripts": {
+    "release": "xyz",
+    "release:patch": "xyz --increment patch",
+    "release:minor": "xyz --increment minor",
+    "release:major": "xyz --increment major"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pelotom/definitely-loader.git"
+  },
+  "keywords": [
+    "webpack",
+    "loader",
+    "definitely",
+    "object",
+    "property",
+    "undefined",
+    "proxy"
+  ],
+  "author": "Tom Crockett",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pelotom/definitely-loader/issues"
+  },
+  "homepage": "https://github.com/pelotom/definitely-loader#readme",
+  "peerDependencies": {
+    "definitely": "^1.0.0"
+  },
+  "devDependencies": {
+    "xyz": "^1.0.0"
+  }
+}
