@@ -5,6 +5,8 @@
   "main": "definitely-loader.js",
   "scripts": {
     "build": "babel --minified -o definitely-loader.js src/definitely-loader.js",
+    "test": "mocha --reporter progress --compilers js:babel-core/register src/*.test.js",
+    "test:watch": "npm run test -- --watch",
     "release": "xyz",
     "release:patch": "xyz --increment patch",
     "release:minor": "xyz --increment minor",
@@ -35,7 +37,11 @@
   "devDependencies": {
     "babel-cli": "6.14.0",
     "babel-preset-es2015": "6.14.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "chai": "^3.5.0",
     "loader-utils": "0.2.15",
+    "mocha": "^3.0.2",
+    "webpack": "^1.13.2",
     "xyz": "^1.0.0"
   }
 }
