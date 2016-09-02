@@ -2,6 +2,7 @@ import { assert, expect } from 'chai'
 import webpack from 'webpack'
 import { resolve, basename, dirname } from 'path'
 import { fork } from 'child_process'
+import { writeFileSync } from 'fs'
 import tmp from 'tmp'
 
 const itt = it
@@ -20,7 +21,7 @@ it = (description, compilerOptions, runCallback) => itt(description, testCallbac
       filename: basename(outFile.name),
       path: dirname(outFile.name)
     },
-    ...compilerOptions
+    ...compilerOptions()
   }, verifySuccess).run((err, stats) => {
 
     safely(() => {
@@ -50,16 +51,47 @@ it = (description, compilerOptions, runCallback) => itt(description, testCallbac
 })
 
 describe('accessing a nonexistent module export', () => {
-  it('works normally without definitely-loader', {
-    entry: './testdata/bar.js'
-  }, message => {
+
+  let file1, file2
+
+  beforeEach(() => {
+    file1 = makeTempJs(`
+      module.exports = {
+        foo: 'bar'
+      }
+    `)
+
+    file2 = makeTempJs(`
+      try {
+        require('${file1.name}').bar
+        process.send('No error')
+      } catch (e) {
+        process.send(e.stack.match(/^([^\\n]*)\\n/)[1])
+      }
+    `)
+  })
+
+  afterEach(() => {
+    file1.removeCallback()
+    file2.removeCallback()
+  })
+
+  it('works normally without definitely-loader', () => ({
+    entry: file2.name,
+  }), message => {
     expect(message).to.equal('No error')
   })
 
-  it('fails with definitely-loader', {
-    entry: './testdata/bar.js',
+  it('fails with definitely-loader', () => ({
+    entry: file2.name,
     module: { loaders: [{ test: /\.js$/, loader: resolve('./src/definitely-loader.js') }] }
-  }, message => {
+  }), message => {
     expect(message).to.equal('Error: attempted to access nonexistent property `bar`')
   })
 })
+
+function makeTempJs(content) {
+  const file = tmp.fileSync({ postfix: '.js' })
+  writeFileSync(file.name, content)
+  return file
+}
