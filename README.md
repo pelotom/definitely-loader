@@ -1,4 +1,4 @@
-# definitely-loader
+# definitely-loader [![Build Status](https://travis-ci.org/pelotom/definitely-loader.svg?branch=master)](https://travis-ci.org/pelotom/definitely-loader)
 
 A [Webpack](https://webpack.github.io/) [loader](https://webpack.github.io/docs/loaders.html) which renders imported modules [definite](https://github.com/pelotom/definitely), such that attempts to reference nonexistent exports thereof generate exceptions.
 
