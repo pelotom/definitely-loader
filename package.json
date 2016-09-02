@@ -1,6 +1,6 @@
 {
   "name": "definitely-loader",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A webpack loader which disallows importing nonexistent members from a module",
   "main": "definitely-loader.js",
   "scripts": {
