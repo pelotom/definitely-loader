@@ -1,6 +1,6 @@
 try {
   require('./foo').bar
-  process.send(0)
+  process.send('No error')
 } catch (e) {
   process.send(e.stack.match(/^([^\n]*)\n/)[1])
 }

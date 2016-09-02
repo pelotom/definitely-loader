@@ -45,7 +45,7 @@ describe('accessing a nonexistent module export', () => {
   it('works normally without definitely-loader', {
     entry: './testdata/bar.js'
   }, message => {
-    expect(message).to.equal(0)
+    expect(message).to.equal('No error')
   })
 
   it('fails with definitely-loader', {
