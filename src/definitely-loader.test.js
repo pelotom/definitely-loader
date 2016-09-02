@@ -90,6 +90,38 @@ describe('accessing a nonexistent module export', () => {
   })
 })
 
+describe('non-object imports', () => {
+
+  let file1, file2
+
+  beforeEach(() => {
+    file1 = makeTempJs(`
+      module.exports = 3
+    `)
+
+    file2 = makeTempJs(`
+      try {
+        var foo = require('${file1.name}')
+        process.send('No error')
+      } catch (e) {
+        process.send(e.stack.match(/^([^\\n]*)\\n/)[1])
+      }
+    `)
+  })
+
+  afterEach(() => {
+    file1.removeCallback()
+    file2.removeCallback()
+  })
+
+  it('are ignored by definitely-loader', () => ({
+    entry: file2.name,
+    module: { loaders: [{ test: /\.js$/, loader: resolve('./src/definitely-loader.js') }] }
+  }), message => {
+    expect(message).to.equal('No error')
+  })
+})
+
 function makeTempJs(content) {
   const file = tmp.fileSync({ postfix: '.js' })
   writeFileSync(file.name, content)
