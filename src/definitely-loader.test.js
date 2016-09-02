@@ -1,17 +1,24 @@
 import { assert, expect } from 'chai'
 import webpack from 'webpack'
-import { resolve } from 'path'
+import { resolve, basename, dirname } from 'path'
 import { fork } from 'child_process'
-
-const OUTPUT = 'test-output'
+import tmp from 'tmp'
 
 const itt = it
 it = (description, compilerOptions, runCallback) => itt(description, testCallback => {
 
+  testCallback = (cb => err => {
+    cb(err)
+    outFile.removeCallback()
+  })(testCallback)
+
+  const outFile = tmp.fileSync()
+
   webpack({
     target: 'node',
     output: {
-      filename: OUTPUT
+      filename: basename(outFile.name),
+      path: dirname(outFile.name)
     },
     ...compilerOptions
   }, verifySuccess).run((err, stats) => {
@@ -20,7 +27,7 @@ it = (description, compilerOptions, runCallback) => itt(description, testCallbac
       verifySuccess(err, stats)
     })
 
-    fork(OUTPUT).on('message', message => safely(() => {
+    fork(outFile.name).on('message', message => safely(() => {
       runCallback(message)
       testCallback()
     }))
@@ -37,6 +44,7 @@ it = (description, compilerOptions, runCallback) => itt(description, testCallbac
     } catch (e) {
       // Failure
       testCallback(e)
+      outFile.removeCallback()
     }
   }
 })
